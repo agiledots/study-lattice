@@ -77,6 +77,14 @@ train_input_fn = tf.estimator.inputs.numpy_input_fn(
 
 lattice_estimator.train(input_fn=train_input_fn)
 
+# ====================================
+# モデルの評価
+# ====================================
+train_metrics = lattice_estimator.evaluate(input_fn=train_input_fn)
+print("train metrics: %r"% train_metrics)
+
+
+
 # Test.
 test_input_fn = tf.estimator.inputs.numpy_input_fn(
     x=test_features,
@@ -85,4 +93,4 @@ test_input_fn = tf.estimator.inputs.numpy_input_fn(
     num_epochs=1,
     shuffle=False)
 
-print(list(lattice_estimator.predict(input_fn=test_input_fn)))
+print("predict: %r " % list(lattice_estimator.predict(input_fn=test_input_fn)))
